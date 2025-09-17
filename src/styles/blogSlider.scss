@@ -1,0 +1,40 @@
+.slider-blog_arrow {
+  filter: drop-shadow(0px 4px 28px rgba(0, 0, 0, 0.15));
+  transition: opacity 0.3s ease-in-out;
+  &.swiper-button-disabled {
+    opacity: 0;
+  }
+}
+
+.slider-blog_link {
+  .slider-blog_image {
+    transition: all 0.5s ease-in-out;
+  }
+  &:hover {
+    .slider-blog_image {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.blog_field {
+  &.fs-cmsfilter_active {
+    background-color: #b4fe8f;
+    border: solid #b4fe8f;
+    color: #19392e;
+
+    .blog_label {
+      font-weight: 500;
+    }
+  }
+  &.is-reset {
+    &.active {
+      background-color: #b4fe8f;
+      border: 1px solid #b4fe8f;
+      color: #19392e;
+      .blog_label {
+        font-weight: 500;
+      }
+    }
+  }
+}

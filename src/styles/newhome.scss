@@ -1,0 +1,105 @@
+/* .navb2b_container {
+  transition: all 0.3s ease-in-out;
+
+  .navb2b-logo_text {
+    transition: all 0.3s ease-in-out;
+  }
+  &.is-active {
+    max-width: 40rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: 100vw;
+    padding: 1rem 2rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    .nav-button_wrapper {
+      display: none;
+    }
+
+    .navb2b-logo_picto {
+      margin: 0;
+    }
+    .navb2b-logo_text {
+      width: 0;
+      opacity: 0;
+    }
+    .navigation_list {
+      gap: 2rem;
+      .navigationb2b_list_item {
+        .navigationb2b_link {
+          color: var(--b2b--colors--blue-800);
+          &:hover {
+            color: var(--b2b--colors--grey-500);
+          }
+        }
+      }
+    }
+  }
+} */
+
+.navb2b_fixed {
+  transition: all 0.3s ease-in-out;
+  &.is-active {
+    transform: translate(-50%, 0);
+  }
+  .navb2b-logo_picto {
+    margin: 0;
+  }
+  .navigation_list {
+    gap: 2rem;
+    .navigationb2b_list_item {
+      .navigationb2b_link {
+        color: var(--b2b--colors--blue-800);
+        &:hover {
+          color: var(--b2b--colors--grey-500);
+        }
+      }
+    }
+  }
+}
+
+.homeb2b_hero-wrap {
+  opacity: 0;
+}
+.fonctionnementb2b_section {
+  // Fonctionnement Component
+  .fonctionnementb2b-illu_item,
+  .fonctionnementb2b-content_item {
+    &.is-active {
+      opacity: 1;
+    }
+  }
+
+  .fonctionnementb2b-navigation_item {
+    &.is-active {
+      background-color: var(--b2b--colors--blue-500);
+      height: 1.5rem;
+    }
+  }
+  .fonctionnementb2b_title {
+    .line {
+      overflow: hidden;
+    }
+  }
+}
+
+.homeb2b_tabs {
+  .homeb2b-tabs_menu-link {
+    &:last-child {
+      padding-bottom: 1.5rem;
+    }
+    &:not(.w--current) {
+      div {
+        transition: opacity 0.3s ease-out;
+        &:not(.homeb2b-tabs_progress, .homeb2b-tabs_progress-shadow) {
+          opacity: 0.2;
+          &.homeb2b-tabs_number {
+            opacity: 0.4;
+            div {
+              opacity: 0.4;
+            }
+          }
+        }
+      }
+    }
+  }
+}
