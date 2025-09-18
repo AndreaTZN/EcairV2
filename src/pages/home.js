@@ -20,11 +20,14 @@ window.Webflow.push(() => {
 
     tl.to($(this), { opacity: 1 });
     tl.from(
-      title,
+      title.find('.line'),
       {
-        yPercent: 10,
+        yPercent: 20,
+        opacity: 0,
         duration: 1,
         ease: 'power3.out',
+        stagger: 0.2,
+        willChange: 'transform,opacity',
       },
       '<'
     );

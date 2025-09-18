@@ -1,7 +1,3 @@
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
-
 window.Webflow ||= [];
 window.Webflow.push(() => {
   const tocWrapper = document.querySelector('.blogpost-toc_items-wrapper');
@@ -92,7 +88,6 @@ window.Webflow.push(() => {
       height: '100%',
       ease: 'none',
     });
-    tl.scrollTrigger.refresh(true);
 
     function handleLazyLoad(config = {}) {
       let lazyImages = gsap.utils.toArray("img[loading='lazy']"),

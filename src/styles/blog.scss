@@ -6,3 +6,13 @@
     text-decoration: none;
   }
 }
+
+.blogpost-toc_link {
+  color: #88939d;
+  transition: color 0.3s ease-in-out;
+  &.active {
+    color: #0b1422;
+    text-decoration: underline;
+    text-decoration-style: solid;
+  }
+}
