@@ -36,6 +36,12 @@
   }
 } */
 
+body {
+  &:has(.navbar_menu-dropdown.is-open) {
+    overflow: hidden;
+  }
+}
+
 .navb2b_fixed {
   transition: all 0.3s ease-in-out;
   &.is-active {

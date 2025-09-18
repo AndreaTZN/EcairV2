@@ -1,23 +1,25 @@
 window.Webflow ||= [];
 window.Webflow.push(() => {
   $('.navb2b-component').each(function () {
-    let mm = gsap.matchMedia();
+    const mm = gsap.matchMedia();
+
     mm.add('(min-width: 992px)', () => {
       const $navWrapper = $('.navb2b-component');
       const $blurBg = $('.dropdown_blur-bg');
 
       const dropdowns = [{ key: 'solutions', className: 'is-solutions' }];
 
-      const timelines = {};
+      const timelines = {}; // { key: { openTl, closeTl } }
       const isOpen = {};
 
-      // Timeline pour le blur
-      const blurTl = gsap.timeline({ paused: true });
-      blurTl.fromTo(
-        $blurBg,
-        { opacity: 0, display: 'none' },
-        { opacity: 1, display: 'block', duration: 0.3, ease: 'power2.out' }
-      );
+      // Blur Timeline
+      const blurTl = gsap
+        .timeline({ paused: true, reversed: true })
+        .fromTo(
+          $blurBg,
+          { opacity: 0, display: 'none' },
+          { opacity: 1, display: 'block', duration: 0.3, ease: 'power2.out' }
+        );
 
       function getElements(className) {
         return {
@@ -28,30 +30,28 @@ window.Webflow.push(() => {
         };
       }
 
-      function createTimeline({ $container, $arrow, $wrapper }) {
-        const tl = gsap.timeline({ paused: true, reversed: true });
+      function createOpenTimeline({ $container, $arrow, $wrapper }) {
+        const tl = gsap.timeline({ paused: true });
 
-        tl.fromTo(
-          $container,
-          { display: 'none', opacity: 0 },
-          {
-            display: 'flex',
-            opacity: 1,
-            duration: 0.5,
-            ease: 'power2.out',
-          }
-        )
-          .fromTo(
-            $wrapper,
-            { opacity: 0 },
-            {
-              opacity: 1,
-              duration: 0.5,
-              ease: 'power2.out',
-            },
-            '-=0.3'
-          )
-          .to($arrow, { rotate: 180, duration: 0.8, ease: 'power2.out' }, '<');
+        tl.set($container, { display: 'flex' });
+        tl.fromTo($container, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+        tl.fromTo($wrapper, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, '<');
+        tl.to($arrow, { rotate: 180, duration: 0.5, ease: 'power2.out' }, '<');
+
+        return tl;
+      }
+
+      function createCloseTimeline({ $container, $arrow, $wrapper }) {
+        const tl = gsap.timeline({
+          paused: true,
+          onComplete: () => {
+            gsap.set($container, { display: 'none' });
+          },
+        });
+
+        tl.to($arrow, { rotate: 0, duration: 0.5, ease: 'power2.inOut' });
+        tl.to($wrapper, { opacity: 0, duration: 0.3, ease: 'power2.inOut' }, '<');
+        tl.to($container, { opacity: 0, duration: 0.3, ease: 'power2.inOut' }, '<');
 
         return tl;
       }
@@ -60,42 +60,60 @@ window.Webflow.push(() => {
         const { $link, $arrow, $container, $wrapper } = getElements(className);
         if (!$link.length || !$arrow.length || !$container.length || !$wrapper.length) return;
 
-        timelines[key] = createTimeline({ $container, $arrow, $wrapper });
+        const openTl = createOpenTimeline({ $container, $arrow, $wrapper });
+        const closeTl = createCloseTimeline({ $container, $arrow, $wrapper });
+
+        timelines[key] = { openTl, closeTl };
         isOpen[key] = false;
 
         const open = () => {
-          timelines[key].timeScale(1).play();
+          closeAllDropdowns(); // ferme les autres
+          timelines[key].openTl.restart(); // ✅ important
+
           isOpen[key] = true;
           $link.addClass('is-open');
-          // Si c'est le premier dropdown ouvert → lancer le blur
+
           if (blurTl.reversed() || !blurTl.isActive()) {
             blurTl.play();
           }
         };
 
         const close = () => {
-          timelines[key].timeScale(1).reverse();
+          timelines[key].closeTl.restart(); // ✅ important
+
           isOpen[key] = false;
+          $link.removeClass('is-open');
 
-          const stillOpen = Object.values(isOpen).some((val) => val === true);
-
-          if (!stillOpen) {
-            // Si plus aucun dropdown ouvert → fermer le blur
+          const anyStillOpen = Object.values(isOpen).some(Boolean);
+          if (!anyStillOpen) {
             blurTl.reverse();
-            $link.removeClass('is-open');
           }
         };
 
-        $link.on('click', () => {
-          if (!isOpen[key]) open();
+        function closeAllDropdowns() {
+          Object.entries(timelines).forEach(([otherKey, { openTl, closeTl }]) => {
+            if (key !== otherKey && isOpen[otherKey]) {
+              openTl.pause(0);
+              closeTl.play();
+              isOpen[otherKey] = false;
+              $(`.navbar_menu-dropdown.is-${otherKey}`).removeClass('is-open');
+            }
+          });
+        }
+
+        // EVENTS
+        $link.on('click', (e) => {
+          e.preventDefault();
+          if (isOpen[key]) {
+            close();
+          } else {
+            open();
+          }
         });
 
         $blurBg.on('click', () => {
           close();
         });
-
-        /*    $link.on('mouseleave', onLeave);
-        $container.on('mouseleave', onLeave); */
       }
 
       dropdowns.forEach(initDropdown);

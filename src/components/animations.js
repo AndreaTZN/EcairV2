@@ -201,9 +201,6 @@ window.Webflow.push(() => {
         scrub: true,
       },
     });
-    tl2.to('.sommaire_wrapper', {
-      top: '8rem',
-    });
 
     function flip(forwards) {
       let state = Flip.getState(flipItemEl);
