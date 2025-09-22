@@ -358,22 +358,6 @@ window.Webflow.push(() => {
     });
   });
 
-  $('.tic_component').each(function (index) {
-    let square = $(this).find('.tic_square');
-    let text = $(this).find('div')[1];
-
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: $(this),
-        start: 'top 80%',
-      },
-    });
-    gsap.set(square, { scale: 0 });
-    gsap.set(text, { opacity: 0, x: -10 });
-    tl.to(square, { scale: 1, duration: 0.5 });
-    tl.to(text, { opacity: 1, x: 0, duration: 0.8 }, '-=0.3');
-  });
-
   // ================================================
   // ABOUT PAGE
   // ================================================
