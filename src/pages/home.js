@@ -2,6 +2,8 @@ import SplitType from 'split-type';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
+  let mm = gsap.matchMedia();
+
   // ================================================
   // HOME PAGE
   // ================================================
@@ -397,18 +399,20 @@ window.Webflow.push(() => {
     const $component = $(this);
     const $items = $component.find('.usagesb2b_item');
 
-    $items.each(function () {
-      const $item = $(this);
+    mm.add('(min-width:991px)', () => {
+      $items.each(function () {
+        const $item = $(this);
 
-      ScrollTrigger.create({
-        trigger: $item,
-        start: 'top 80%',
-        end: 'bottom top',
+        ScrollTrigger.create({
+          trigger: $item,
+          start: 'top 80%',
+          end: 'bottom top',
 
-        toggleClass: {
-          targets: $item,
-          className: 'active',
-        },
+          toggleClass: {
+            targets: $item,
+            className: 'active',
+          },
+        });
       });
     });
   });
