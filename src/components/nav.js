@@ -120,13 +120,14 @@ window.Webflow.push(() => {
     });
   });
 
-  /*   $('.navb2b-component').each(function () {
-    let nav = $('.navb2b_fixed');
+  $('.navb2b-component').each(function () {
+    let nav = $('.navb2b-component');
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.main-wrapper',
-        start: '500px top',
+        start: '10px top',
         end: 'bottom top',
+
         onEnter: () => {
           nav.addClass('is-active');
         },
@@ -135,5 +136,5 @@ window.Webflow.push(() => {
         },
       },
     });
-  }); */
+  });
 });

@@ -559,4 +559,30 @@ window.Webflow.push(() => {
       }
     });
   });
+
+  /*   const counts = {};
+
+  // 1. Parcours des éléments avec data-text-list-categorie pour compter chaque catégorie
+  $('[data-text-list-categorie]').each(function () {
+    const category = $(this).text().trim();
+
+    if (!counts[category]) {
+      counts[category] = 1;
+    } else {
+      counts[category]++;
+    }
+  });
+
+  // 2. Mise à jour des nombres dans la liste de catégories
+  $('.categorie-collection_item').each(function () {
+    const $item = $(this);
+    const categoryName = $item.find('[data-text-categorie]').text().trim();
+
+    // Récupère le nombre depuis notre objet counts, ou 0 s’il n’existe pas
+    const count = counts[categoryName] || 0;
+
+    console.log('Catégorie trouvée :', count); // Pour vérifier les catégories trouvées
+
+    $item.find('[data-text-number]').text(count);
+  }); */
 });

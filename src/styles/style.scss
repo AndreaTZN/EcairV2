@@ -2,6 +2,13 @@
 @import './blogSlider.scss';
 @import './blog.scss';
 @import './newhome.scss';
+
+.navb2b-component {
+  &.is-active {
+    box-shadow: inset 0 -1px #e1e4e7;
+  }
+}
+
 .card_key,
 .valeur_card {
   transition: transform 0.6s ease-in-out;
