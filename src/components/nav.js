@@ -119,21 +119,44 @@ window.Webflow.push(() => {
       dropdowns.forEach(initDropdown);
     });
   });
-
   $('.navb2b-component').each(function () {
-    let nav = $('.navb2b-component');
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.main-wrapper',
-        start: '10px top',
-        end: 'bottom top',
+    const $nav = $(this);
 
-        onEnter: () => {
-          nav.addClass('is-active');
-        },
-        onLeaveBack: () => {
-          nav.removeClass('is-active');
-        },
+    // ScrollTrigger pour ajouter la classe is-active selon la position
+    ScrollTrigger.create({
+      trigger: '.main-wrapper',
+      start: '10px top',
+      end: 'bottom top',
+      onEnter: () => {
+        $nav.addClass('is-active');
+      },
+      onLeaveBack: () => {
+        $nav.removeClass('is-active');
+      },
+    });
+
+    // ScrollTrigger pour détecter le scroll direction
+    ScrollTrigger.create({
+      start: 0,
+      end: 'max',
+      onUpdate: (self) => {
+        const direction = self.direction;
+
+        if (direction === 1) {
+          // scroll vers le bas
+          gsap.to($nav, {
+            yPercent: -100,
+            duration: 0.3,
+            ease: 'power2.out',
+          });
+        } else {
+          // scroll vers le haut
+          gsap.to($nav, {
+            yPercent: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+          });
+        }
       },
     });
   });
