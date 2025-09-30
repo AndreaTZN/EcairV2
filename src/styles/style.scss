@@ -29,6 +29,12 @@
       transition: all 0.6s ease-in-out;
       opacity: 0;
     }
+    .team_card_content2 {
+      .team_card_content-footer {
+        transition: all 0.6s ease-in-out;
+        opacity: 0;
+      }
+    }
     .team_card_image {
       transition: all 0.6s ease-in-out;
     }
@@ -39,6 +45,11 @@
       }
       .team_card_image {
         transform: scale(1);
+      }
+      .team_card_content2 {
+        .team_card_content-footer {
+          opacity: 1;
+        }
       }
     }
   }
