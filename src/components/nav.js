@@ -146,7 +146,7 @@ window.Webflow.push(() => {
           // scroll vers le bas
           gsap.to($nav, {
             yPercent: -100,
-            duration: 0.3,
+            duration: 0.6,
             ease: 'power2.out',
           });
         } else {
