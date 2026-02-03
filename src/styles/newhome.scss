@@ -111,9 +111,13 @@ body {
 }
 
 .homeb2b-solutions_item {
-  transition: background 0.3s ease-in-out;
+  .homeb2b-solutions_hover {
+    transition: opacity 0.3s ease-in-out;
+  }
 
   &:hover {
-    background-color: #014ecb;
+    .homeb2b-solutions_hover {
+      opacity: 1;
+    }
   }
 }
