@@ -78,7 +78,7 @@ window.Webflow.push(() => {
     let progressBar = $(this).find('.blogpost_progress-bar');
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: '.blogpost_rich-text',
+        trigger: '#content',
         start: 'top center',
         end: 'bottom center',
         scrub: 0.5,
