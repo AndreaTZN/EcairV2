@@ -1,7 +1,7 @@
-@import './renovation.scss';
-@import './blogSlider.scss';
-@import './blog.scss';
-@import './newhome.scss';
+@use './renovation';
+@use './blogSlider';
+@use './blog';
+@use './newhome';
 
 .navb2b-component {
   &.is-active {
@@ -371,31 +371,33 @@
 }
 
 .integrations_item {
-  transition: background-color 0.3s ease-in-out;
-  .integrations_item-title,
-  .integrations_item-paragraphe {
-    transition: color 0.2s ease-in;
-  }
-  .integrations_item-cta {
-    transform: translateX(-4px);
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-  }
-
-  &:hover {
-    background-color: #014ecb;
-    color: white;
-    .integrations_item-title {
-      color: white;
-    }
+  &:has(.integrations_item-link) {
+    transition: background-color 0.3s ease-in-out;
+    .integrations_item-title,
     .integrations_item-paragraphe {
-      color: #ccdfff;
+      transition: color 0.2s ease-in;
     }
     .integrations_item-cta {
-      opacity: 1;
-      transform: translateX(0px);
+      transform: translateX(-4px);
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
     }
-    svg {
-      transition: color 0.2s ease-in;
+
+    &:hover {
+      background-color: #014ecb;
+      color: white;
+      .integrations_item-title {
+        color: white;
+      }
+      .integrations_item-paragraphe {
+        color: #ccdfff;
+      }
+      .integrations_item-cta {
+        opacity: 1;
+        transform: translateX(0px);
+      }
+      svg {
+        transition: color 0.2s ease-in;
+      }
     }
   }
 }
